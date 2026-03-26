@@ -8,7 +8,18 @@
 #include "bd/lfs_filebd.h"
 
 #include <fcntl.h>
+#ifdef _WIN32
+#include <io.h>
+#include <sys/types.h>
+#ifndef ssize_t
+typedef intptr_t ssize_t;
+#endif
+#ifndef off_t
+typedef _off_t off_t;
+#endif
+#else
 #include <unistd.h>
+#endif
 #include <errno.h>
 
 #ifdef _WIN32
